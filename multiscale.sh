@@ -161,7 +161,7 @@ else
 	echo "current iteration count is $i"
 fi
 	echo "Your current image size is $imageSize pixels"
-echo "Your outfile target is $out_file"	
+	echo "Your outfile target is $out_file"	
 
 ########################################################
 #THESE ARE IMAGE SIZE CHECKS
