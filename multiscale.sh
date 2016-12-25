@@ -169,12 +169,7 @@ echo "Your outfile target is $out_file"
 #CHECK SMALL TO MEDIUM SIZES
 if [ $imageSize -le $smallSize ]; then
 echo "size is less than $smallSize"
-echo "size is less than $smallSize"
-echo "size is less than $smallSize"
-echo "size is less than $smallSize"
-echo "size is less than $smallSize"
-echo "size is less than $smallSize"
-echo "size is less than $smallSize"
+
 	lbfgsNumCor=$((lbfgsNumCor-$lbfgsNumCorSubtract))
 	imageSize=$((imageSize+$addPixelsPerStep))
 	styleScale="$initialstyleScale"
@@ -192,13 +187,7 @@ echo "size is less than $smallSize"
 ########################################################
 #CHECK MEDIUM TO LARGE SIZES
 elif [ $imageSize -le $mediumSize ]; then
-echo "size is less than $mediumSize"
-echo "size is less than $mediumSize"
-echo "size is less than $mediumSize"
-echo "size is less than $mediumSize"
-echo "size is less than $mediumSize"
-echo "size is less than $mediumSize"
-echo "size is less than $mediumSize"
+	echo "size is less than $mediumSize"
 	imageSize=$((imageSize+$addPixelsPerStep))
 	imageSize=$((imageSize-$subtractPixelsPerStep))
 	lbfgsNumCor="$minLbfgsNumCor"
@@ -217,17 +206,7 @@ echo "size is less than $mediumSize"
 ########################################################
 #CHECK LARGE SIZES AND BEYOND
 elif [ $imageSize -le $largeSize ]; then
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
+	echo "size is larger than $largeSize"
 	imageSize=$((imageSize+$addPixelsPerStep))
 	imageSize=$((imageSize-$subtractPixelsPerStep))
 	imageSize=$((imageSize-$subtractMorePixelsPerStep))
@@ -240,17 +219,7 @@ echo "size is larger than $largeSize"
 	echo "Your current image size is $imageSize pixels"
 	echo "Your current style scale is $styleScale"	
 elif [ $imageSize -le $xlargeSize ]; then
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
+	echo "size is larger than $largeSize"
 	imageSize=$((imageSize+$addPixelsPerStep))
 	imageSize=$((imageSize-$subtractPixelsPerStep))
 	imageSize=$((imageSize-$subtractMorePixelsPerStep))
@@ -269,17 +238,7 @@ echo "size is larger than $largeSize"
 ########################################################
 #CHECK XLARGE SIZES AND BEYOND
 elif [ $imageSize -le $xlargeSize ]; then
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
-echo "size is larger than $largeSize"
+	echo "size is larger than $largeSize"
 	imageSize=$((imageSize+$addPixelsPerStep))
 	imageSize=$((imageSize-$subtractPixelsPerStep))
 	imageSize=$((imageSize-$subtractMorePixelsPerStep))
