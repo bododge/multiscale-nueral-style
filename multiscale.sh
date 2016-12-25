@@ -226,14 +226,12 @@ elif [ $imageSize -le $xlargeSize ]; then
 	imageSize=$((imageSize+$addPixelsPerStep))
 	imageSize=$((imageSize-$subtractPixelsPerStep))
 	imageSize=$((imageSize-$subtractMorePixelsPerStep))
-	imageSize=$((imageSize-$subtractEvenMorePixelsPerStep))
 	numIter="$minimumIters"
 	#SWITCHING TO FEWER STYLE LAYERS TO SAVE MEMORY
 	styleLayers="-style_layers relu1_1,relu2_1,relu3_1,relu4_1"
 	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
-	echo "substracting 35 from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "substracting ^^ from the image size here"
+	echo "substracting $subtractPixelsPerStep) from the image size here"
+	echo "substracting $subtractMorePixelsPerStep from the image size here"
 	echo "substracting ^^ from the image size here"
 	echo "Your current image size is $imageSize pixels"
 	echo "Your current style scale is $styleScale"	
