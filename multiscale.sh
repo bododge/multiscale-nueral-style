@@ -12,7 +12,6 @@ neuralStyleFile="neural_style.lua"
 ########################################################
 #VARS YOU SHOULD CHANGE TO SUIT YOUR OWN NEEDS AND TASTES ARE BELOW
 ########################################################
-########################################################
 #BASIC SETTINGS
 ########################################################
 # noise fractal seed
