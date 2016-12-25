@@ -185,6 +185,7 @@ echo "size is less than $smallSize"
 	echo "Your current style scale is $styleScale"	
 	echo "Your outfile target is $out_file"	
 	numIter=$((numIter-$subtractItersPerStep))
+	styleLayers="-style_layers relu1_1,relu2_1,relu3_1,relu4_1,relu5_1"
 
 ########################################################
 #CHECK MEDIUM TO LARGE SIZES
@@ -214,8 +215,8 @@ elif [ $imageSize -le $largeSize ]; then
 	imageSize=$((imageSize-$subtractMorePixelsPerStep))
 	numIter="$minimumIters"
 	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
-	echo "substracting 35 from the image size here"
-	echo "substracting ^^ from the image size here"
+	echo "substracting $subtractPixelsPerStep) from the image size here"
+	echo "substracting $subtractMorePixelsPerStep from the image size here"
 	echo "substracting ^^ from the image size here"
 	echo "substracting ^^ from the image size here"
 	echo "Your current image size is $imageSize pixels"
@@ -228,7 +229,7 @@ elif [ $imageSize -le $xlargeSize ]; then
 	imageSize=$((imageSize-$subtractEvenMorePixelsPerStep))
 	numIter="$minimumIters"
 	#SWITCHING TO FEWER STYLE LAYERS TO SAVE MEMORY
-	ghostVar="-style_layers relu1_1,relu2_1,relu3_1,relu4_1"
+	styleLayers="-style_layers relu1_1,relu2_1,relu3_1,relu4_1"
 	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
 	echo "substracting 35 from the image size here"
 	echo "substracting ^^ from the image size here"
@@ -247,14 +248,14 @@ elif [ $imageSize -le $xlargeSize ]; then
 	imageSize=$((imageSize-$subtractEvenMorePixelsPerStep))
 	numIter="$minimumIters"
 	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
-	echo "substracting 35 from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "substracting ^^ from the image size here"
+	echo "substracting $subtractPixelsPerStep from the image size here"
+	echo "substracting $subtractMorePixelsPerStep from the image size here"
+	echo "substracting $subtractEvenMorePixelsPerStep from the image size here"
 	echo "substracting ^^ from the image size here"
 	echo "Your current image size is $imageSize pixels"
 	echo "Your current style scale is $styleScale"	
 	#SWITCHING TO EVEN FEWER STYLE LAYERS TO SAVE MORE MEMORY
-	ghostVar="-style_layers relu2_1,relu3_1,relu4_1"
+	styleLayers="-style_layers relu2_1,relu3_1,relu4_1"
 else
 	break
 	echo "Your current image size is $imageSize pixels"
@@ -293,7 +294,7 @@ CMDneural="th $userpath$neuralStyleFile
 				-style_scale $styleScale 
 				-save_iter $saveIter
 				-normalize_gradients
-				$ghostVar
+				$styleLayers
 				-init image
 				-lbfgs_num_correction $lbfgsNumCor
 				$multiGpu"
