@@ -4,9 +4,9 @@
 ########################################################
 #PATHS YOU ABSOLTUELY NEED TO CHANGE TO WORK ON YOUR OWN SYSTEM
 ########################################################
-cd /Users/username/Documents/Deepstyler/neural-style
+cd /Users/username/Documents/neural-style
 #user paths to scripts
-userpath="/Users/username/Documents/Deepstyler/neural-style/"
+userpath="/Users/username/Documents/neural-style/"
 neuralStyleFile="neural_style.lua"
 
 ########################################################
