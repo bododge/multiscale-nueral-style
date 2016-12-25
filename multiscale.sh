@@ -12,6 +12,29 @@ neuralStyleFile="neural_style.lua"
 ########################################################
 #VARS YOU SHOULD CHANGE TO SUIT YOUR OWN NEEDS AND TASTES ARE BELOW
 ########################################################
+########################################################
+#BASIC SETTINGS
+########################################################
+# noise fractal seed
+seedIt="0"
+defaultOptimizer="lbfgs"
+
+#SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
+memorySaveOptimizer="adam"
+printIter="10"
+saveIter="0"
+styleWeight="7500"
+contentWeight="800"
+learningRate="1"
+
+#STYLE SCALE SETTINGS
+initialstyleScale=".8"
+
+#SHRINKING STYLE SCALE SLOWLY BY SUBTRACTING VALUE BELOW EVERYTIME, INSTEAD OF ALL AT ONCE OR NOT AT ALL
+#JUST ZERO OUT subtractstyleScale TO DISABLE AND KEEP A CONSTANT VALUE OF initialstyleScale
+#SETTING TO A LARGER NUMBER BELOW MAY SAVE MEMORY, ADD A FURTHER SHARPENING EFFECT, OR ADD UNWANTED NOISE
+subtractstyleScale=".011"
+
 backend="nn"
 gpu="0"
 
@@ -65,28 +88,7 @@ lbfgsNumCor="20"
 lbfgsNumCorSubtract="5"
 minLbfgsNumCor="1"
 
-########################################################
-#BASIC SETTINGS
-########################################################
-# noise fractal seed
-seedIt="0"
-defaultOptimizer="lbfgs"
 
-#SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
-memorySaveOptimizer="adam"
-printIter="10"
-saveIter="0"
-styleWeight="7500"
-contentWeight="800"
-learningRate=".5"
-
-#STYLE SCALE SETTINGS
-initialstyleScale=".8"
-
-#SHRINKING STYLE SCALE SLOWLY BY SUBTRACTING VALUE BELOW EVERYTIME, INSTEAD OF ALL AT ONCE OR NOT AT ALL
-#JUST ZERO OUT subtractstyleScale TO DISABLE AND KEEP A CONSTANT VALUE OF initialstyleScale
-#SETTING TO A LARGER NUMBER BELOW MAY SAVE MEMORY, ADD A FURTHER SHARPENING EFFECT, OR ADD UNWANTED NOISE
-subtractstyleScale=".011"
 
 ########################################################
 #MAIN FUNCTION BEGINS HERE, FIRST FEW STEPS SETUP YOUR DRAG AND DROP VARIABLES I LEARNED THIS METHOD FROM GITHUB USER 0000sir, AND HIS VERY USEFUL 'LARGER-NEURAL-STYLE' -BIGBRUSH TILING SCRIPT.
