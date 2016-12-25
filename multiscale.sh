@@ -19,7 +19,7 @@ gpu="0"
 multiGpu=" "
 
 #UNCOMMENT THIS LINE TO ENABLE MULTIGPU FUNCTIONALITY
-multiGpu="-gpu 0,1 -multigpu_strategy 9"
+#multiGpu="-gpu 0,1 -multigpu_strategy 9"
 
 ########################################################
 #PIXEL SIZE VALUES
