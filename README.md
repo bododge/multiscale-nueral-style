@@ -15,8 +15,7 @@ The script is a loop of commands iterating through each using the output image f
 
 Here is an example series of what can be created with the script:
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="dIlrNW7"><a href="//imgur.com/dIlrNW7">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-
+[Imgur](http://i.imgur.com/dIlrNW7.jpg)
 
 
 <blockquote class="imgur-embed-pub" lang="en" data-id="0TCApCR"><a href="//imgur.com/0TCApCR">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
