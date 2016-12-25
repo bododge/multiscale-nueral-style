@@ -23,3 +23,8 @@ Here is a quick example series of what can be created with the script. These are
 <img src="http://i.imgur.com/0TCApCR.jpg" alt=""/>
 <img src="http://i.imgur.com/vVURJIM.jpg" alt=""/>
 <img src="http://i.imgur.com/fxPJHpY.jpg" alt=""/>
+
+Here is a complete series:
+<img src="http://i.imgur.com/dnlTaet.jpg" alt=""/>
+
+
