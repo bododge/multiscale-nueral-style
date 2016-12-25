@@ -234,25 +234,6 @@ elif [ $imageSize -le $xlargeSize ]; then
 	echo "substracting ^^ from the image size here"
 	echo "Your current image size is $imageSize pixels"
 	echo "Your current style scale is $styleScale"	
- 
-########################################################
-#CHECK XLARGE SIZES AND BEYOND
-elif [ $imageSize -le $xlargeSize ]; then
-	echo "size is larger than $largeSize"
-	imageSize=$((imageSize+$addPixelsPerStep))
-	imageSize=$((imageSize-$subtractPixelsPerStep))
-	imageSize=$((imageSize-$subtractMorePixelsPerStep))
-	imageSize=$((imageSize-$subtractEvenMorePixelsPerStep))
-	numIter="$minimumIters"
-	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
-	echo "substracting $subtractPixelsPerStep from the image size here"
-	echo "substracting $subtractMorePixelsPerStep from the image size here"
-	echo "substracting $subtractEvenMorePixelsPerStep from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "Your current image size is $imageSize pixels"
-	echo "Your current style scale is $styleScale"	
-	#SWITCHING TO EVEN FEWER STYLE LAYERS TO SAVE MORE MEMORY
-	styleLayers="-style_layers relu2_1,relu3_1,relu4_1"
 else
 	break
 	echo "Your current image size is $imageSize pixels"
