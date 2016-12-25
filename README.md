@@ -8,7 +8,7 @@ You should have [Neural-Style](https://github.com/jcjohnson/neural-style/) first
 
 Create a copy of this script in your neural-style directory. 
 
-Usage is drag and drop. Drag three files into the terminal window, the .sh file followed by two image files:
+<strong>Usage is drag and drop.</strong> Drag three files into the terminal window, the .sh file followed by two image files:
 
 `multiscale.sh content_file style_file`
 
