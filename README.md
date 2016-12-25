@@ -15,7 +15,9 @@ Usage is drag and drop. Drag three files into the terminal window, the .sh file 
 
 The script is a loop of commands iterating through each using the output image from the previous, and using a series of if then statements to determine next steps throughout the process. There are a ton of notes in the script itself so it should be easy to modify if needed.
 
-Here is a quick example series of what can be created with the script. This is the first and last image of a 20 part upres series. 
+Here is a quick example series of what can be created with the script. These are the first and last image 15 part series. 
 
 <img src="http://i.imgur.com/dIlrNW7.jpg" alt=""/>
 <img src="http://i.imgur.com/0TCApCR.jpg" alt=""/>
+<img src="http://i.imgur.com/vVURJIM.jpg" alt=""/>
+<img src="http://i.imgur.com/fxPJHpY.jpg" alt=""/>
