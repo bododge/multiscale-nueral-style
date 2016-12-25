@@ -13,7 +13,7 @@ Create a copy of this script in your neural-style directory.
 `multiscale.sh content_file style_file`
 
 
-The script is a loop of commands iterating through each using the output image from the previous, and using a series of if then statements to determine next steps throughout the process. There are a ton of notes in the script itself so it should be easy to modify if needed.
+The script is a loop of commands iterating through each using the output image from the previous, and using a series of if then statements to determine next steps throughout the process. The script creates multiscale and project directories, keeping things neatly organized in their own folder. There are a ton of notes in the .sh script so it should be easy to modify as needed.
 
 Here is a quick example series of what can be created with the script. These are the first and last image 15 part series. 
 
