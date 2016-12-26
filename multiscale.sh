@@ -203,7 +203,6 @@ elif [ $imageSize -le $mediumSize ]; then
 	echo "Your current style scale is $styleScale"	
 	echo "Your outfile target is $out_file"
 	echo "Switching your optimizer method to adam to save memory"
-	optimizer="$memorySaveOptimizer"
 
 ########################################################
 #CHECK LARGE SIZES AND BEYOND
@@ -219,7 +218,9 @@ elif [ $imageSize -le $largeSize ]; then
 	echo "substracting ^^ from the image size here"
 	echo "substracting ^^ from the image size here"
 	echo "Your current image size is $imageSize pixels"
-	echo "Your current style scale is $styleScale"	
+	echo "Your current style scale is $styleScale"
+	optimizer="$memorySaveOptimizer"
+	
 elif [ $imageSize -le $xlargeSize ]; then
 	echo "size is larger than $largeSize"
 	imageSize=$((imageSize+$addPixelsPerStep))
