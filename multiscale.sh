@@ -56,12 +56,12 @@ numIter="220"
 #USE VALUES OF ZERO TO KEEP INITIAL CONSTANTS FROM ABOVE UNCHANGED
 ########################################################
 #USE A + or - OPERATOR, SCRIPT IS EXPECTING EITHER - OR + IF YOU LEAVE IT OUT IT WILL BREAK LOGIC
-#YOU COULD CHOOSE TO ADD INSTEAD LIKE mathStyleScale="+.015" OR mathStyleWeight="+50"
+#YOU COULD CHOOSE TO ADD OR SUBTRACT INSTEAD LIKE mathStyleScale="+.015" OR mathStyleWeight="-50"
 
 mathStyleScale="-.011" 
 mathStyleWeight="+0"
 mathContentWeight="+0"
-mathIters="-110"
+mathIters="-60"
 
 backend="cudnn"
 gpu="0"
