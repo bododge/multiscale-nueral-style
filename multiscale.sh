@@ -25,6 +25,12 @@ numberOfSteps="5"
 stepExpanse=$((endingSize-$startingSize))
 addPixelsPerStep=$((stepExpanse / $numberOfSteps))
 
+
+#SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
+switchAdamSize="2600"
+memorySaveOptimizer="adam"
+
+echo "When your image size goes to $switchAdamSize or more, you will switch to Adam optimizer to save memory"
 echo "Your starting size is $startingSize, Your ending size is $endingSize"
 echo "Your step expanse is $stepExpanse"
 echo "Your per pixel step is $addPixelsPerStep over the course of $numberOfSteps steps"
@@ -81,9 +87,6 @@ lbfgsNumCor="20"
 mathLbfgsNumCor="5"
 minLbfgsNumCor="1"
 defaultOptimizer="lbfgs"
-
-#SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
-memorySaveOptimizer="adam"
 
 ########################################################
 #MAIN FUNCTION BEGINS HERE, FIRST FEW STEPS SETUP YOUR DRAG AND DROP VARIABLES I LEARNED THIS METHOD FROM GITHUB USER 0000sir, AND HIS VERY USEFUL 'LARGER-NEURAL-STYLE' -BIGBRUSH TILING SCRIPT.
@@ -173,6 +176,19 @@ if [ $numIter -lt $minimumIters ]; then
 else
 	echo "switch not active"
 fi
+
+########################################################
+#TEST SIZE BEFORE SWITCHING TO ADAM OPTIMIZER
+########################################################
+if [ $imageSize -lt memorySaveOptimizer ]; then
+	optimizer="adam"
+else
+	echo "switch not active"
+fi
+
+memorySaveOptimizer
+
+
 echo " "
 echo " "
 echo " "
