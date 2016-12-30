@@ -186,9 +186,6 @@ else
 	echo "switch not active"
 fi
 
-memorySaveOptimizer
-
-
 echo " "
 echo " "
 echo " "
