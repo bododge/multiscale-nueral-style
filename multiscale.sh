@@ -171,7 +171,7 @@ fi
 ########################################################
 #TEST SIZE BEFORE SWITCHING TO ADAM OPTIMIZER
 ########################################################
-if [ $imageSize -lt $switchAdamSize ]; then
+if [ $imageSize -ge $switchAdamSize ]; then
 	optimizer="adam"
 else
 	echo "switch not active"
