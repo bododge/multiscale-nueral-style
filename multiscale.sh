@@ -25,7 +25,6 @@ numberOfSteps="5"
 stepExpanse=$((endingSize-$startingSize))
 addPixelsPerStep=$((stepExpanse / $numberOfSteps))
 
-
 #SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
 switchAdamSize="2600"
 memorySaveOptimizer="adam"
@@ -38,14 +37,13 @@ echo "Your per pixel step is $addPixelsPerStep over the course of $numberOfSteps
 ########################################################
 #BASIC SETTINGS, CONSTANTS
 ########################################################
-
 # noise fractal seed
 seedIt="0"
 printIter="10"
 saveIter="0"
 learningRate="1"
 
-#STYLE SCALE SETTINGS
+#STYLE, CONTENT AND SCALE SETTINGS
 styleScale=".8"
 styleWeight="9500"
 contentWeight="800"
@@ -70,7 +68,7 @@ gpu="0"
 multiGpu=" "
 
 #UNCOMMENT THIS LINE TO ENABLE MULTIGPU FUNCTIONALITY
-multiGpu="-gpu 1,0 -multigpu_strategy 8"
+#multiGpu="-gpu 1,0 -multigpu_strategy 8"
 
 ########################################################
 #ITERATION VALUES & OPTIMIZER VALUES
