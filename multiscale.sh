@@ -7,18 +7,17 @@
 cd /Users/username/Documents/neural-style
 #user paths to scripts
 userpath="/Users/username/Documents/neural-style/"
-neuralStyleFile="neural_style.lua"
-########################################################
+neuralStyleFile="neural_style.lua"########################################################
 #SET THE SIZES BELOW TO SUIT YOUR COMPUTER AND PREFERENCE
 ########################################################
 #HOW SMALL SHOULD THE STARTING IMAGE BE? 
-startingSize="500"
+startingSize="300"
 
 #HOW LARGE SHOULD THE ENDING IMAGE BE?
-endingSize="1000"
+endingSize="2800"
 
 #HOW MANY IMAGES WOULD YOU LIKE TO GENERATE, HOW MANY STEPS SHOULD IT TAKE?
-numberOfSteps="3"
+numberOfSteps="5"
 
 #THIS IS THE SIMPLE FORUMULA TO DETERMINE PIXELS PER STEP
 stepExpanse=$((endingSize-$startingSize))
@@ -60,10 +59,13 @@ minimumIters="30"
 #YOU COULD CHOOSE TO ADD OR SUBTRACT INSTEAD LIKE mathStyleScale="+.015" OR mathStyleWeight="-50"
 
 mathStyleScale="-.011" 
-mathStyleWeight="+0"
+mathStyleWeight="+1000"
 mathContentWeight="+0"
 mathIters="-60"
 
+########################################################
+#BACKEND SETTINGS
+########################################################
 backend="cudnn"
 gpu="0"
 
@@ -71,11 +73,11 @@ gpu="0"
 multiGpu=" "
 
 #UNCOMMENT THIS LINE TO ENABLE MULTIGPU FUNCTIONALITY
-#multiGpu="-gpu 1,0 -multigpu_strategy 8"
+multiGpu="-gpu 1,0 -multigpu_strategy 8"
 
 #OPTIMIZER VALUES
 lbfgsNumCor="20"
-mathLbfgsNumCor="5"
+mathLbfgsNumCor="-5"
 minLbfgsNumCor="1"
 defaultOptimizer="lbfgs"
 
@@ -140,7 +142,7 @@ elif [ $i = 2 ]; then
 	contentWeight=$((contentWeight$mathContentWeight))
 	styleScale=$(echo "scale=3;$styleScale $mathStyleScale" | bc)
 	imageSize=$((imageSize+$addPixelsPerStep))
-
+	lbfgsNumCor=$((lbfgsNumCor$mathLbfgsNumCor))
 
 ########################################################
 #TEST FOR GREATER THAN FRAME 2
@@ -153,6 +155,8 @@ elif [ $i -gt 2 ]; then
 	contentWeight=$((contentWeight$mathContentWeight))
 	styleScale=$(echo "scale=3;$styleScale $mathStyleScale" | bc)
 	imageSize=$((imageSize+$addPixelsPerStep))
+	lbfgsNumCor=$((lbfgsNumCor$mathLbfgsNumCor))
+
 
 ########################################################
 else
@@ -165,7 +169,7 @@ fi
 if [ $numIter -lt $minimumIters ]; then
 	numIter="$minimumIters"
 else
-	echo "switch not active"
+	echo "numIter switch not activated"
 fi
 
 ########################################################
@@ -174,17 +178,29 @@ fi
 if [ $imageSize -ge $switchAdamSize ]; then
 	optimizer="adam"
 else
-	echo "switch not active"
+	echo "adam switch not activated"
 fi
 
 ########################################################
 #TEST SIZE BEFORE SWITCHING TO ADAM OPTIMIZER
 ########################################################
 if [ $imageSize -gt $endingSize ]; then
+	echo "you have already reached your max ending size of $endingSize px"
+
 break
 
 else
 	echo "you have not yet reached your max size of $endingSize"
+fi
+
+
+########################################################
+#TEST FOR LBFGS NUMCOR RESET TO 1 WHEN APPLICABLE
+########################################################
+if [ $lbfgsNumCor -lt 1 ]; then
+	lbfgsNumCor="1"
+else
+	echo "you have not activated lbfgsNumCor Value $lbfgsNumCor"
 fi
 
 
@@ -202,6 +218,8 @@ echo "your current content weight is $contentWeight"
 echo "your current style weight is $styleWeight"
 echo "Your current image size is $imageSize pixels"
 echo "Your number of neural style iterations is $numIter"
+echo "Your lbfgs numCor value is $lbfgsNumCor"
+echo "Your current optimizer is $optimizer"
 echo " "
 echo " "
 echo " "
