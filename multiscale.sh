@@ -27,7 +27,6 @@ addPixelsPerStep=$((stepExpanse / $numberOfSteps))
 
 #SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
 switchAdamSize="2600"
-memorySaveOptimizer="adam"
 
 echo "When your image size goes to $switchAdamSize or more, you will switch to Adam optimizer to save memory"
 echo "Your starting size is $startingSize, Your ending size is $endingSize"
@@ -172,7 +171,7 @@ fi
 ########################################################
 #TEST SIZE BEFORE SWITCHING TO ADAM OPTIMIZER
 ########################################################
-if [ $imageSize -lt $memorySaveOptimizer ]; then
+if [ $imageSize -lt $switchAdamSize ]; then
 	optimizer="adam"
 else
 	echo "switch not active"
