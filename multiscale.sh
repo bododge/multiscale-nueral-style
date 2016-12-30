@@ -172,7 +172,7 @@ fi
 ########################################################
 #TEST SIZE BEFORE SWITCHING TO ADAM OPTIMIZER
 ########################################################
-if [ $imageSize -lt memorySaveOptimizer ]; then
+if [ $imageSize -lt $memorySaveOptimizer ]; then
 	optimizer="adam"
 else
 	echo "switch not active"
@@ -181,7 +181,7 @@ fi
 ########################################################
 #TEST SIZE BEFORE SWITCHING TO ADAM OPTIMIZER
 ########################################################
-if [ $imageSize -gt endingSize ]; then
+if [ $imageSize -gt $endingSize ]; then
 break
 
 else
