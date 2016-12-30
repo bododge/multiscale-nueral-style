@@ -76,7 +76,7 @@ gpu="0"
 multiGpu=" "
 
 #UNCOMMENT THIS LINE TO ENABLE MULTIGPU FUNCTIONALITY
-multiGpu="-gpu 1,0 -multigpu_strategy 8"
+#multiGpu="-gpu 1,0 -multigpu_strategy 8"
 
 #OPTIMIZER VALUES
 lbfgsNumCor="20"
