@@ -8,22 +8,22 @@ cd /Users/username/Documents/neural-style
 #user paths to scripts
 userpath="/Users/username/Documents/neural-style/"
 neuralStyleFile="neural_style.lua"
-
 ########################################################
 #SET THE SIZES BELOW TO SUIT YOUR COMPUTER AND PREFERENCE
 ########################################################
 #HOW SMALL SHOULD THE STARTING IMAGE BE? 
-startingSize="300"
+startingSize="500"
 
 #HOW LARGE SHOULD THE ENDING IMAGE BE?
-endingSize="3100"
+endingSize="1000"
 
 #HOW MANY IMAGES WOULD YOU LIKE TO GENERATE, HOW MANY STEPS SHOULD IT TAKE?
-numberOfSteps="5"
+numberOfSteps="3"
 
 #THIS IS THE SIMPLE FORUMULA TO DETERMINE PIXELS PER STEP
 stepExpanse=$((endingSize-$startingSize))
 addPixelsPerStep=$((stepExpanse / $numberOfSteps))
+
 
 #SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
 switchAdamSize="2600"
@@ -37,17 +37,21 @@ echo "Your per pixel step is $addPixelsPerStep over the course of $numberOfSteps
 ########################################################
 #BASIC SETTINGS, CONSTANTS
 ########################################################
+
 # noise fractal seed
 seedIt="0"
 printIter="10"
 saveIter="0"
 learningRate="1"
 
-#STYLE, CONTENT AND SCALE SETTINGS
+#STYLE SCALE SETTINGS
 styleScale=".8"
 styleWeight="9500"
 contentWeight="800"
 numIter="220"
+
+#ABSOLUTE MINIMUM OF ITERATIONS PER FRAME (CATCHES IF/WHEN MATH SLIPS BELOW THIS VALUE)
+minimumIters="30"
 
 ########################################################
 #MATH IS OPTIONAL YOU CAN ADD OR SUBTRACT THESE VALUES ON EVERY STEP, 
@@ -69,16 +73,6 @@ multiGpu=" "
 
 #UNCOMMENT THIS LINE TO ENABLE MULTIGPU FUNCTIONALITY
 #multiGpu="-gpu 1,0 -multigpu_strategy 8"
-
-########################################################
-#ITERATION VALUES & OPTIMIZER VALUES
-########################################################
-
-#SET VAR BELOW TO ZERO TO NULLIFY ITER SUBTRACTION
-subtractItersPerStep="110"
-
-#ABSOLUTE MINIMUM OF ITERATIONS PER FRAME, MORE ITERATIONS MAY ADD NOISE ON LARGER SIZES
-minimumIters="30"
 
 #OPTIMIZER VALUES
 lbfgsNumCor="20"
@@ -183,6 +177,17 @@ if [ $imageSize -lt memorySaveOptimizer ]; then
 else
 	echo "switch not active"
 fi
+
+########################################################
+#TEST SIZE BEFORE SWITCHING TO ADAM OPTIMIZER
+########################################################
+if [ $imageSize -gt endingSize ]; then
+break
+
+else
+	echo "you have not yet reached your max size of $endingSize"
+fi
+
 
 echo " "
 echo " "
