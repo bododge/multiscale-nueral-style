@@ -10,84 +10,80 @@ userpath="/Users/username/Documents/neural-style/"
 neuralStyleFile="neural_style.lua"
 
 ########################################################
-#VARS YOU SHOULD CHANGE TO SUIT YOUR OWN NEEDS AND TASTES ARE BELOW
+#SET THE SIZES BELOW TO SUIT YOUR COMPUTER AND PREFERENCE
 ########################################################
-#BASIC SETTINGS
+#HOW SMALL SHOULD THE STARTING IMAGE BE? 
+startingSize="300"
+
+#HOW LARGE SHOULD THE ENDING IMAGE BE?
+endingSize="3100"
+
+#HOW MANY IMAGES WOULD YOU LIKE TO GENERATE, HOW MANY STEPS SHOULD IT TAKE?
+numberOfSteps="5"
+
+#THIS IS THE SIMPLE FORUMULA TO DETERMINE PIXELS PER STEP
+stepExpanse=$((endingSize-$startingSize))
+addPixelsPerStep=$((stepExpanse / $numberOfSteps))
+
+echo "Your starting size is $startingSize, Your ending size is $endingSize"
+echo "Your step expanse is $stepExpanse"
+echo "Your per pixel step is $addPixelsPerStep over the course of $numberOfSteps steps"
+
 ########################################################
+#BASIC SETTINGS, CONSTANTS
+########################################################
+
 # noise fractal seed
 seedIt="0"
-defaultOptimizer="lbfgs"
-
-#SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
-memorySaveOptimizer="adam"
 printIter="10"
 saveIter="0"
-styleWeight="7500"
-contentWeight="800"
 learningRate="1"
 
 #STYLE SCALE SETTINGS
-initialstyleScale=".8"
+styleScale=".8"
+styleWeight="9500"
+contentWeight="800"
+numIter="220"
 
-#SHRINKING STYLE SCALE SLOWLY BY SUBTRACTING VALUE BELOW EVERYTIME, INSTEAD OF ALL AT ONCE OR NOT AT ALL
-#JUST ZERO OUT subtractstyleScale TO DISABLE AND KEEP A CONSTANT VALUE OF initialstyleScale
-#SETTING TO A LARGER NUMBER BELOW MAY SAVE MEMORY, ADD A FURTHER SHARPENING EFFECT, OR ADD UNWANTED NOISE
-subtractstyleScale=".011"
+########################################################
+#MATH IS OPTIONAL YOU CAN ADD OR SUBTRACT THESE VALUES ON EVERY STEP, 
+#USE VALUES OF ZERO TO KEEP INITIAL CONSTANTS FROM ABOVE UNCHANGED
+########################################################
+#USE A + or - OPERATOR, SCRIPT IS EXPECTING EITHER - OR + IF YOU LEAVE IT OUT IT WILL BREAK LOGIC
+#YOU COULD CHOOSE TO ADD INSTEAD LIKE mathStyleScale="+.015" OR mathStyleWeight="+50"
 
-backend="nn"
+mathStyleScale="-.011" 
+mathStyleWeight="+0"
+mathContentWeight="+0"
+mathIters="-110"
+
+backend="cudnn"
 gpu="0"
 
-#LEAVE THIS VAR BLANK TO SKIP MULTIGPU FUNCITONALITY
+#LEAVE THIS VAR BLANK TO SKIP MULTIGPU FUNCITONALITTY
 multiGpu=" "
 
 #UNCOMMENT THIS LINE TO ENABLE MULTIGPU FUNCTIONALITY
-#multiGpu="-gpu 0,1 -multigpu_strategy 9"
-
-########################################################
-#PIXEL SIZE VALUES
-########################################################
-#STARTING SIZE HAS A HUGE EFFECT ON FINAL OUTPUT'S OVERALL STYLE SCALE, SET YOUR PREFERENCE BELOW
-startingSize="550"
-
-#SET SMALLSIZE TO AN IMAGE SIZE LOWER THAN YOU ARE SURE YOU CAN REACH
-smallSize="1330"
-
-#SET MEDIUMSIZE TO AN IMAGE SIZE YOU WILL PROBABLY REACH
-mediumSize="1550"
-
-#SET LARGESIZE THINK OF THIS AS A NEAR RANGE FINISHING VALUE YOU'D LIKE TO REACH BUT MIGHT NOT
-largeSize="1800"
-
-#SET XLARGESIZE TO A TARGET THAT WILL END OR BREAK THE LOOP TO END YOUR MULTISCALE SESSION
-xlargeSize="2000"
-
-#ADDED TO EACH STEP TO INCREASE SIZE
-addPixelsPerStep="200"
-
-#SUBTRACTED FROM MEDIUM-LARGE SIZES TO SLOW PER STEP GROWTH
-subtractPixelsPerStep="100"
-
-#SUBTRACTED FROM LARGE SIZES TO SLOW PER STEP GROWTH, SMALLER STEPS MEANS BETTER COHERENCY, LESS NOISE
-subtractMorePixelsPerStep="50"
-subtractEvenMorePixelsPerStep="15"
+multiGpu="-gpu 1,0 -multigpu_strategy 8"
 
 ########################################################
 #ITERATION VALUES & OPTIMIZER VALUES
 ########################################################
-startingIters="200"
 
 #SET VAR BELOW TO ZERO TO NULLIFY ITER SUBTRACTION
-subtractItersPerStep="50"
+subtractItersPerStep="110"
 
 #ABSOLUTE MINIMUM OF ITERATIONS PER FRAME, MORE ITERATIONS MAY ADD NOISE ON LARGER SIZES
 minimumIters="30"
 
 #OPTIMIZER VALUES
 lbfgsNumCor="20"
-lbfgsNumCorSubtract="5"
+mathLbfgsNumCor="5"
 minLbfgsNumCor="1"
+defaultOptimizer="lbfgs"
 
-
+#SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
+memorySaveOptimizer="adam"
 
 ########################################################
 #MAIN FUNCTION BEGINS HERE, FIRST FEW STEPS SETUP YOUR DRAG AND DROP VARIABLES I LEARNED THIS METHOD FROM GITHUB USER 0000sir, AND HIS VERY USEFUL 'LARGER-NEURAL-STYLE' -BIGBRUSH TILING SCRIPT.
@@ -134,9 +130,7 @@ out_file_prev="$proj_dir/${clean_name}.${style_name}.$DWN.jpg"
 	imageSize="$startingSize"
 	out_file_prev2="$1"
 	out_file_prev="$1"
-	numIter="$startingIters"
-	imageSize=$((startingSize-$addPixelsPerStep))
-	numIter=$((numIter+$subtractItersPerStep))
+	numIter="$numIter"
 	optimizer="$defaultOptimizer"
 	echo "your frame is #1 and content frame are both equal to $out_file_prev"	
 	echo "Your current image size is $imageSize"	
@@ -147,110 +141,58 @@ out_file_prev="$proj_dir/${clean_name}.${style_name}.$DWN.jpg"
 #TEST FOR FRAME 2
 elif [ $i = 2 ]; then
 #use original content source as init frame
-	echo "Your current image size is $imageSize pixels"
-	echo "Your outfile target is $out_file"	
+	numIter=$((numIter$mathIters))
+	styleWeight=$((styleWeight$mathStyleWeight))
+	contentWeight=$((contentWeight$mathContentWeight))
+	styleScale=$(echo "scale=3;$styleScale $mathStyleScale" | bc)
+	imageSize=$((imageSize+$addPixelsPerStep))
+
 
 ########################################################
 #TEST FOR GREATER THAN FRAME 2
 #IMAGE WILL BE INITIALIZED ON PREVIOUS ITERATION
 #BUT THIS SETTING IS CONTENT IMAGE TO TWO PREVIOUS ITERATIONS AGO TO AVOID SOME NOISE
 elif [ $i -gt 2 ]; then
-	out_file_prev2="$proj_dir/${clean_name}.${style_name}.$DWN2.jpg"
-	echo "Your current frame is greater than 2"	
+	out_file_prev2="$1"
+	numIter=$((numIter$mathIters))
+	styleWeight=$((styleWeight$mathStyleWeight))
+	contentWeight=$((contentWeight$mathContentWeight))
+	styleScale=$(echo "scale=3;$styleScale $mathStyleScale" | bc)
+	imageSize=$((imageSize+$addPixelsPerStep))
+
 ########################################################
 else
 	echo "current iteration count is $i"
-fi
-	echo "Your current image size is $imageSize pixels"
-	echo "Your outfile target is $out_file"	
-
-########################################################
-#THESE ARE IMAGE SIZE CHECKS
-########################################################
-#CHECK SMALL TO MEDIUM SIZES
-if [ $imageSize -le $smallSize ]; then
-echo "size is less than $smallSize"
-
-	lbfgsNumCor=$((lbfgsNumCor-$lbfgsNumCorSubtract))
-	imageSize=$((imageSize+$addPixelsPerStep))
-	styleScale="$initialstyleScale"
-	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
-	echo "adding $addPixelsPerStep to the image size here"
-	echo "adding ^^^ to the image size here"
-	echo "adding ^^^ to the image size here"
-	echo "adding ^^^ to the image size here"
-	echo "except during frame 1"
-	echo "Your current image size is $imageSize pixels"
-	echo "Your current style scale is $styleScale"	
-	echo "Your outfile target is $out_file"	
-	numIter=$((numIter-$subtractItersPerStep))
-	styleLayers="-style_layers relu1_1,relu2_1,relu3_1,relu4_1,relu5_1"
-
-########################################################
-#CHECK MEDIUM TO LARGE SIZES
-elif [ $imageSize -le $mediumSize ]; then
-	echo "size is less than $mediumSize"
-	imageSize=$((imageSize+$addPixelsPerStep))
-	imageSize=$((imageSize-$subtractPixelsPerStep))
-	lbfgsNumCor="$minLbfgsNumCor"
-	numIter="$minimumIters"
-	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
-	echo "substracting $subtractPixelsPerStep from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "Your current image size is $imageSize pixels"
-	echo "Your current style scale is $styleScale"	
-	echo "Your outfile target is $out_file"
-	echo "Switching your optimizer method to adam to save memory"
-
-########################################################
-#CHECK LARGE SIZES AND BEYOND
-elif [ $imageSize -le $largeSize ]; then
-	echo "size is larger than $largeSize"
-	imageSize=$((imageSize+$addPixelsPerStep))
-	imageSize=$((imageSize-$subtractPixelsPerStep))
-	imageSize=$((imageSize-$subtractMorePixelsPerStep))
-	numIter="$minimumIters"
-	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
-	echo "substracting $subtractPixelsPerStep) from the image size here"
-	echo "substracting $subtractMorePixelsPerStep from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "Your current image size is $imageSize pixels"
-	echo "Your current style scale is $styleScale"
-	optimizer="$memorySaveOptimizer"
-	
-elif [ $imageSize -le $xlargeSize ]; then
-	echo "size is larger than $largeSize"
-	imageSize=$((imageSize+$addPixelsPerStep))
-	imageSize=$((imageSize-$subtractPixelsPerStep))
-	imageSize=$((imageSize-$subtractMorePixelsPerStep))
-	numIter="$minimumIters"
-	#SWITCHING TO FEWER STYLE LAYERS TO SAVE MEMORY
-	styleLayers="-style_layers relu1_1,relu2_1,relu3_1,relu4_1"
-	styleScale=$(echo "scale=3;$styleScale -$subtractstyleScale" | bc)
-	echo "substracting $subtractPixelsPerStep) from the image size here"
-	echo "substracting $subtractMorePixelsPerStep from the image size here"
-	echo "substracting ^^ from the image size here"
-	echo "Your current image size is $imageSize pixels"
-	echo "Your current style scale is $styleScale"	
-else
-	break
-	echo "Your current image size is $imageSize pixels"
 fi
 
 ########################################################
 #MINIMUM numIter TEST
 ########################################################
 if [ $numIter -lt $minimumIters ]; then
-numIter="$minimumIters"
-	echo "Your minimum number of iterations is now $minimumIters"
-	echo "Your number of neural style iterations is $numIter"	
+	numIter="$minimumIters"
 else
-	echo "Your numIters has not fallen below $minimumIters and will instead use previous logic"
-	echo "Your number of neural style iterations is $numIter"	
+	echo "switch not active"
 fi
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo "Your outfile target is $out_file"	
+echo "this is your #$i iteration"
+echo "your current style scale is $styleScale"
+echo "your current image size is $imageSize px"
+echo "your current content weight is $contentWeight"
+echo "your current style weight is $styleWeight"
+echo "Your current image size is $imageSize pixels"
+echo "Your number of neural style iterations is $numIter"
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
 
 ########################################################
 #THE ACUTAL NEURAL STYLE COMMAND GETS PRINTED BELOW
@@ -273,6 +215,7 @@ CMDneural="th $userpath$neuralStyleFile
 				-style_scale $styleScale 
 				-save_iter $saveIter
 				-normalize_gradients
+				-tv_weight 0
 				$styleLayers
 				-init image
 				-lbfgs_num_correction $lbfgsNumCor
