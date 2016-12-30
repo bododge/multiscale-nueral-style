@@ -58,8 +58,8 @@ minimumIters="30"
 #YOU COULD CHOOSE TO ADD OR SUBTRACT INSTEAD LIKE mathStyleScale="+.015" OR mathStyleWeight="-50"
 
 mathStyleScale="-.011" 
-mathStyleWeight="+1000"
-mathContentWeight="-50"
+mathStyleWeight="+0"
+mathContentWeight="-0"
 mathIters="-60"
 
 ########################################################
