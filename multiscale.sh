@@ -18,7 +18,7 @@ startingSize="300"
 #HOW LARGE SHOULD THE ENDING IMAGE BE?
 endingSize="2800"
 
-#HOW MANY IMAGES WOULD YOU LIKE TO GENERATE, HOW MANY STEPS SHOULD IT TAKE?
+#HOW MANY IMAGES WOULD YOU LIKE TO GENERATE AFTER THE INITIAL IMAGE, HOW MANY STEPS SHOULD IT TAKE?
 numberOfSteps="5"
 
 #THIS IS THE SIMPLE FORUMULA TO DETERMINE PIXELS PER STEP
@@ -28,13 +28,9 @@ addPixelsPerStep=$((stepExpanse / $numberOfSteps))
 
 #SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
 switchAdamSize="2600"
-
-echo " "
 echo "When your image size goes to $switchAdamSize or more, you will switch to Adam optimizer to save memory"
-echo "Your starting size is $startingSize, Your ending size is $endingSize"
-echo "Your step expanse is $stepExpanse"
-echo "Your per pixel step is $addPixelsPerStep over the course of $numberOfSteps steps"
-echo " "
+
+
 ########################################################
 #BASIC SETTINGS, CONSTANTS
 ########################################################
@@ -63,7 +59,7 @@ minimumIters="30"
 
 mathStyleScale="-.011" 
 mathStyleWeight="+1000"
-mathContentWeight="+0"
+mathContentWeight="-50"
 mathIters="-60"
 
 ########################################################
@@ -214,8 +210,15 @@ echo " "
 echo " "
 echo " "
 echo " "
+echo " "
+echo "Your starting size is $startingSize, Your ending size is $endingSize"
+echo "Your step expanse is $stepExpanse"
+echo "Your per pixel step is $addPixelsPerStep over the course of $numberOfSteps resolution changes"
+echo "This is STEP #$i"
+echo " "
+echo " "
+echo " "
 echo "Your outfile target is $out_file"	
-echo "this is your #$i iteration"
 echo "your current style scale is $styleScale"
 echo "your current image size is $imageSize px"
 echo "your current content weight is $contentWeight"
@@ -280,8 +283,9 @@ $CMDneural
 #FINISHES THE LOOP
 ########################################################
 done
+########################################################
+#FINISHES MAIN FUNCTION WRAP
 }
-
 ########################################################
 #CALL THE MAIN PROGRAM!
 main $1 $2
