@@ -7,7 +7,9 @@
 cd /Users/username/Documents/neural-style
 #user paths to scripts
 userpath="/Users/username/Documents/neural-style/"
-neuralStyleFile="neural_style.lua"########################################################
+neuralStyleFile="neural_style.lua"
+
+########################################################
 #SET THE SIZES BELOW TO SUIT YOUR COMPUTER AND PREFERENCE
 ########################################################
 #HOW SMALL SHOULD THE STARTING IMAGE BE? 
@@ -27,11 +29,12 @@ addPixelsPerStep=$((stepExpanse / $numberOfSteps))
 #SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
 switchAdamSize="2600"
 
+echo " "
 echo "When your image size goes to $switchAdamSize or more, you will switch to Adam optimizer to save memory"
 echo "Your starting size is $startingSize, Your ending size is $endingSize"
 echo "Your step expanse is $stepExpanse"
 echo "Your per pixel step is $addPixelsPerStep over the course of $numberOfSteps steps"
-
+echo " "
 ########################################################
 #BASIC SETTINGS, CONSTANTS
 ########################################################
@@ -116,6 +119,7 @@ DWN=$((i-1))
 
 out_file="$proj_dir/${clean_name}.${style_name}.$i.jpg"
 out_file_prev="$proj_dir/${clean_name}.${style_name}.$DWN.jpg"
+out_file_prev2="$proj_dir/${clean_name}.${style_name}.$DWN.jpg"
 
 #SERIES OF IF STATEMENTS BELOW WILL ADD CONDITIONALS TO THE LOOP STEP YOU ARE ON
 #######################################################
@@ -149,7 +153,7 @@ elif [ $i = 2 ]; then
 #IMAGE WILL BE INITIALIZED ON PREVIOUS ITERATION
 #BUT THIS SETTING IS CONTENT IMAGE TO TWO PREVIOUS ITERATIONS AGO TO AVOID SOME NOISE
 elif [ $i -gt 2 ]; then
-	out_file_prev2="$1"
+	out_file_prev2="$proj_dir/${clean_name}.${style_name}.$DWN.jpg"
 	numIter=$((numIter$mathIters))
 	styleWeight=$((styleWeight$mathStyleWeight))
 	contentWeight=$((contentWeight$mathContentWeight))
