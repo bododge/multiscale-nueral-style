@@ -23,7 +23,8 @@ numberOfSteps="5"
 
 #THIS IS THE SIMPLE FORUMULA TO DETERMINE PIXELS PER STEP
 stepExpanse=$((endingSize-$startingSize))
-addPixelsPerStep=$((stepExpanse / $numberOfSteps))
+numberOfStepsLessOne=$((numberOfSteps-1))
+addPixelsPerStep=$((stepExpanse / $numberOfStepsLessOne))
 
 
 #SWITCH TO ADAM AT LARGE SIZES TO SAVE MEMORY
