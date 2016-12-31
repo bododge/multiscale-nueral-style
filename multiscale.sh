@@ -182,7 +182,7 @@ else
 fi
 
 ########################################################
-#TEST SIZE BEFORE SWITCHING TO ADAM OPTIMIZER
+#TEST FOR MAX ENDING SIZE TO DETERMINE IF YOU SHOULD STOP RUNNING THE LOOP
 ########################################################
 if [ $imageSize -gt $endingSize ]; then
 	echo "you have already reached your max ending size of $endingSize px"
