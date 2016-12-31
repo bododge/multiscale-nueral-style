@@ -32,4 +32,10 @@ Here is a quick example series of what can be created with the script. These are
 Here is a complete series:
 <img src="http://i.imgur.com/dnlTaet.jpg" alt=""/>
 
+Here is an example of what can be created using the multiscale-multiscale.sh
+
+<img src="http://i.imgur.com/btslu3i.jpg" alt=""/>
+
+
+
 
