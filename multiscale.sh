@@ -197,8 +197,8 @@ fi
 ########################################################
 #TEST FOR LBFGS NUMCOR RESET TO 1 WHEN APPLICABLE
 ########################################################
-if [ $lbfgsNumCor -lt 1 ]; then
-	lbfgsNumCor="1"
+if [ $lbfgsNumCor -lt $minLbfgsNumCor ]; then
+	lbfgsNumCor="$minLbfgsNumCor"
 else
 	echo "you have not activated lbfgsNumCor Value $lbfgsNumCor"
 fi
