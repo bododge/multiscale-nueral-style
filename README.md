@@ -19,8 +19,8 @@ Inside the .sh file you will define your starting size, ending size and number o
 There are additional options for adding or subtracting on each step values for style scale, number of iterations, content weight and style weight. Style weight and content weight per step math are set to zero by default. I recommend shrinking style scale by some small amount over the course of the multiscale session. (This adds a sharpening effect, and enables slightly higher sizes - set to zero to disable)
  
  
- #What is multiscale-multiscale.sh?
-An additional version of the script is included that will make multiple image sets with different starting sizes. Just set the length of the loop and your startingPixelMarch var to define how many pixels you'd like the starting pixel size to grow for each phase. I made this is mostly for comparison and testing purposes and figured I might as well share it with the main script. I recommend playing with multiscale.sh first.
+# What is multiscale-multiscale.sh for?
+ An additional version of the script is included that will make multiple image sets with different starting sizes. Just set the length of the loop and your startingPixelMarch var to define how many pixels you'd like the starting pixel size to grow for each phase. I made this is mostly for comparison and testing purposes and figured I might as well share it with the main script. I recommend playing with multiscale.sh first.
 
 Here is a quick example series of what can be created with the script. These are the first and last image in a 15 part series. 
 
