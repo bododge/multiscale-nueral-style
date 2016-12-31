@@ -14,7 +14,7 @@ Create a copy of this script in your neural-style directory.
 
 `multiscale.sh content_file style_file`
 
-Inside the .sh file you will define your starting size, ending size and number of images you'd like to generate after the initial image, and the script will evenly size each output over your multiscale session. The script is a loop of commands iterating through each using the output image from the previous, and using a series of if then statements to determine next steps throughout the process. The script creates multiscale and project directories, keeping things neatly organized in their own folder. If you stop to change settings and run again the script will attempt to pick up where you left off. 
+Inside the .sh file you will define your starting size, ending size and the total number of images you'd like to generate. The script will evenly size each output over your multiscale session. The script is a loop of commands iterating through each using the output image from the previous, and using a series of if then statements to determine next steps throughout the process. The script creates multiscale and project directories, keeping things neatly organized in their own folder. If you stop to change settings and run again the script will attempt to pick up where you left off. 
 
 There are additional options for adding or subtracting on each step values for style scale, number of iterations, content weight and style weight. Style weight and content weight per step math are set to zero by default. I recommend shrinking style scale by some small amount over the course of the multiscale session. (This adds a sharpening effect, and enables slightly higher sizes - set to zero to disable)
  
