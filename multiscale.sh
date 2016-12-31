@@ -147,9 +147,12 @@ elif [ $i = 2 ]; then
 ########################################################
 #TEST FOR GREATER THAN FRAME 2
 #IMAGE WILL BE INITIALIZED ON PREVIOUS ITERATION
-#BUT THIS SETTING IS CONTENT IMAGE TO TWO PREVIOUS ITERATIONS AGO TO AVOID SOME NOISE
+#CONTENT IMAGE WILL BE SET ON PREVIOUS ITERATION
 elif [ $i -gt 2 ]; then
+	out_file_prev="$proj_dir/${clean_name}.${style_name}.$DWN.jpg"
 	out_file_prev2="$proj_dir/${clean_name}.${style_name}.$DWN.jpg"
+	#uncomment var below to set content image to two iterations ago.
+	#out_file_prev2="$proj_dir/${clean_name}.${style_name}.$DWN2.jpg"
 	numIter=$((numIter$mathIters))
 	styleWeight=$((styleWeight$mathStyleWeight))
 	contentWeight=$((contentWeight$mathContentWeight))
