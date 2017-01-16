@@ -2,11 +2,13 @@
 #THIS SCRIPT IS LOADED WITH COMMENTS, ECHO STATEMENTS AND VERBOSE VAR NAMES
 #HOPEFULLY THIS MAKES IT EASY TO READ AND DEBUG, FEEL FREE TO MAKE YOUR OWN EDITS
 ########################################################
-#PATHS YOU ABSOLTUELY NEED TO CHANGE TO WORK ON YOUR OWN SYSTEM
+#CHANGE PATH TO THE ORIGINATING DIRECTORY
 ########################################################
-cd /Users/username/Documents/neural-style
-#user paths to scripts
-userpath="/Users/username/Documents/neural-style/"
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+if [[ "$PWD" != "$DIR" ]]
+then
+    cd $DIR
+fi
 neuralStyleFile="neural_style.lua"
 
 ########################################################
@@ -241,7 +243,7 @@ echo " "
 ########################################################
 #THE ACUTAL NEURAL STYLE COMMAND GETS PRINTED BELOW
 ########################################################
-CMDneural="th $userpath$neuralStyleFile
+CMDneural="th $neuralStyleFile
 				-style_image $2 
 				-content_image $out_file_prev2
 				-init_image $out_file_prev		
